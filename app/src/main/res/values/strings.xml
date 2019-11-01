@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">integrador2</string>
+    <string name="enter_email">Ingrese un Email</string>
+    <string name="enter_password">Ingrese Contraseña</string>
+    <string name="registrar">Registrar Usuario</string>
+    <string name="login">Login Usuario</string>
+</resources>
