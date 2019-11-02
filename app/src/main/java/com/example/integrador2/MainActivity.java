@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+
 import java.io.Console;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -89,6 +90,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         progressDialog.dismiss();
                     }
                 });
+        if(TextUtils.isEmpty(password) | password.length() < 5){
+            Toast.makeText(this,"Falta ingresar la contraseña",Toast.LENGTH_LONG).show();
+            return;
+        }
+        //verificamos que las cajas de texto no esten vacias
+        if(TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(this, "Se debe ingresar un email",Toast.LENGTH_LONG).show();
+            return;
+        }
+
 
     }
 
@@ -97,5 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Invocamos al método:
         registrarUsuario();
     }
+
+
+
 }
 
