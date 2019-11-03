@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -43,7 +44,12 @@ public class RegistrarEmpresa extends AppCompatActivity {
 
 
         btnRegistrarEmpresa = (Button) findViewById(R.id.botonRegistrarEmpresa);
-
+        btnRegistrarEmpresa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //codigo de cloud  Firestore
+            }
+        });
 
         progressDialog = new ProgressDialog(this);
 

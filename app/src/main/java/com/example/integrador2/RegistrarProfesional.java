@@ -5,10 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+
+import java.io.IOException;
 
 public class RegistrarProfesional extends AppCompatActivity {
     //defining view objects
@@ -43,9 +49,18 @@ public class RegistrarProfesional extends AppCompatActivity {
 
 
         btnRegistrarProfes = (Button) findViewById(R.id.botonRegistrarProfe);
+        btnRegistrarProfes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //codigo de cloud  Firestore
+
+            }
+        });
 
 
         progressDialog = new ProgressDialog(this);
+
+
     }
 
 }
