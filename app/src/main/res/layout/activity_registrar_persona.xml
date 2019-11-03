@@ -39,15 +39,15 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/TxtPasswordRegProfe"
+            android:id="@+id/TxtPasswordRegPers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:hint="@string/enter_passwordProfe"
+            android:hint="@string/enter_passwordPers"
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/botonRegistrarEmpresaPers"
+            android:id="@+id/botonRegistrarPers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"

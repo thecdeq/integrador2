@@ -47,7 +47,7 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/TxtPasswordRegPers"
+            android:id="@+id/TxtPasswordRegProfe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -55,7 +55,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/botonRegistrarEmpresaProfe"
+            android:id="@+id/botonRegistrarProfe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
