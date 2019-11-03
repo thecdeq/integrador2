@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".RegistrarProfesional">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:id="@+id/Txt_NombreProfe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_NombreProfe"
+            android:inputType="textPersonName"/>
+        <EditText
+            android:id="@+id/Txt_ApellidoProfe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_ApellidoProfe"
+            android:inputType="textPersonName"/>
+        <EditText
+            android:id="@+id/Txt_Profesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_Profesion"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/TxtEmailProfe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_emailProfe"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/TxtPasswordRegPers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_passwordProfe"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/botonRegistrarEmpresaProfe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="@string/registrarProfe" />
+
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+

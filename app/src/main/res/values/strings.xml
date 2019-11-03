@@ -1,7 +1,27 @@
 <resources>
     <string name="app_name">integrador2</string>
     <string name="enter_email">Ingrese un Email</string>
+    <string name="enter_emailPers">Ingrese un Email</string>
+    <string name="enter_emailEmpre">Ingrese un Email</string>
+    <string name="enter_emailProfe">Ingrese un Email</string>
     <string name="enter_password">Ingrese Contraseña</string>
-    <string name="registrar">Registrar Usuario</string>
+    <string name="enter_passwordPers">Ingrese Contraseña</string>
+    <string name="enter_passwordEmpre">Ingrese Contraseña</string>
+    <string name="enter_passwordProfe">Ingrese Contraseña</string>
+    <string name="registrar">Registrate</string>
+    <string name="registrarEmpresa">Registrate Empresa</string>
+    <string name="registrarPers">Registrate Persona</string>
+    <string name="registrarProfe">Registrate Profesional</string>
     <string name="login">Login Usuario</string>
+    <string name="PERSONA">Persona</string>
+    <string name="EMPRESA">Empresa</string>
+    <string name="PROFESIONAL">Profesional</string>
+    <string name="enter_NombrePers">Ingrese Nombre Persona</string>
+    <string name="enter_NombreEmpr">Ingrese Nombre Comercial</string>
+    <string name="enter_NombreProfe">Ingrese Nombre Profesional</string>
+    <string name="enter_Profesion">Ingrese su Profesion</string>
+    <string name="enter_Rubro">Ingrese Rubro</string>
+    <string name="enter_RUC">Ingrese su RUC</string>
+    <string name="enter_ApellidoPers">Ingrese Apellido Persona</string>
+    <string name="enter_ApellidoProfe">Ingrese Apellido Profesional</string>
 </resources>

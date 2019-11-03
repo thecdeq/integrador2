@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.text.TextUtils;
@@ -21,13 +22,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.Console;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     //defining view objects
     private EditText TextEmail;
     private EditText TextPassword;
-    private Button btnRegistrar;
+    private Button btnRegistrar, btnLogin;
     private ProgressDialog progressDialog;
+
 
 
     //Declaramos un objeto firebaseAuth
@@ -46,11 +48,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextPassword = (EditText) findViewById(R.id.TxtPassword);
 
         btnRegistrar = (Button) findViewById(R.id.botonRegistrar);
+        btnLogin = (Button) findViewById(R.id.botonLogin);
 
         progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
-        btnRegistrar.setOnClickListener(this);
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {   //    Actividad Actual        -   Clase destino
+                    //Android maneja contextos, el contexto es el estado actual del usuario, es decir donde esta, el "this" significa la clase o el contexto actual,
+                // mas adelante veras ejemplos donde se usa el contexto
+                startActivity(new Intent(MainActivity.this, RegistrarUsuario.class)); // si, este metodo cambiara a la siguiente ventana al presionar el boton registrar
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+    // correlo
+                //
+            }
+        });
     }
 
     private void registrarUsuario(){
@@ -60,13 +78,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String password  = TextPassword.getText().toString().trim();
 
         //Verificamos que las cajas de texto no esten vacías
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Se debe ingresar un email",Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(password) | password.length() < 5){
+            Toast.makeText(this,"Falta ingresar la contraseña",Toast.LENGTH_LONG).show();
             return;
         }
-
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Falta ingresar la contraseña",Toast.LENGTH_LONG).show();
+        //verificamos que las cajas de texto no esten vacias
+        if(TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(this, "Se debe ingresar un email",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -90,24 +108,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         progressDialog.dismiss();
                     }
                 });
-        if(TextUtils.isEmpty(password) | password.length() < 5){
-            Toast.makeText(this,"Falta ingresar la contraseña",Toast.LENGTH_LONG).show();
-            return;
-        }
-        //verificamos que las cajas de texto no esten vacias
-        if(TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            Toast.makeText(this, "Se debe ingresar un email",Toast.LENGTH_LONG).show();
-            return;
-        }
+
 
 
     }
 
-    @Override
-    public void onClick(View view) {
-        //Invocamos al método:
-        registrarUsuario();
-    }
+
 
 
 

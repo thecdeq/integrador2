@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".RegistrarEmpresa">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:id="@+id/Txt_NombreEmpr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_NombreEmpr"
+            android:inputType="textPersonName"/>
+        <EditText
+            android:id="@+id/Txt_Rubro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_Rubro"
+            android:inputType="textPersonName"/>
+        <EditText
+            android:id="@+id/Txt_RUC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_RUC"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/TxtEmailEmpre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_emailEmpre"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/TxtPasswordRegEmpre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/enter_passwordEmpre"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/botonRegistrarEmpresa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="@string/registrarEmpresa" />
+
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
