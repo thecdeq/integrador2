@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class RegistrarPersona extends AppCompatActivity {
 
@@ -52,7 +54,11 @@ public class RegistrarPersona extends AppCompatActivity {
         btnRegistrarPers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //codigo de cloud  Firestore
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                // aqui agregaras el codigo de la seccion "Agregar datos de la documentacion de Firebase"
+
+
             }
         });
 
