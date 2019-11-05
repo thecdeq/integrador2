@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 import java.io.Console;
@@ -65,6 +66,23 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = TextEmail.getText().toString().trim();
+                String password  = TextPassword.getText().toString().trim();
+
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            //ok, tienes un correo y una contraseña, al entrar en esta seccion sabes que el correo y la contraseña son correctos
+                            //task.isSuccessful() significa tarea correcta, es decir si se inicio la sesion existe.
+                            // ahora, la cuenta fue registrada correctamente, significa que esta aqui, como
+                            startActivity(new Intent(MainActivity.this, HomePersona.class));
+
+                        }
+
+                    }
+                });
     // correlo
                 //
             }
@@ -92,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Realizando registro en linea...");
         progressDialog.show();
 
-        //creating a new user
+        //creacion de nuevo usuario
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -105,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"No se pudo registrar el usuario ",Toast.LENGTH_LONG).show();
                     Toast.makeText(MainActivity.this, task.toString(), Toast.LENGTH_SHORT).show();
                 }
+
+
                 progressDialog.dismiss();
             }
         });

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,6 +30,7 @@ import java.util.Map;
 
 
 public class RegistrarPersona extends AppCompatActivity {
+
 
     //defining view objects
     private EditText Text_NombrePers;
@@ -66,14 +69,16 @@ public class RegistrarPersona extends AppCompatActivity {
         btnRegistrarPers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                registrarUsuario();
             }
         });
+    }
 
         private void registrarUsuario(){
 
+
             //Obtenemos el email y la contraseña desde las cajas de texto
-            String email = TextEmailPers.getText().toString().trim();
+            final String email = TextEmailPers.getText().toString().trim();
             String password = TextPasswordRegPers.getText().toString().trim();
 
             //Verificamos que las cajas de texto no esten vacías
@@ -87,7 +92,8 @@ public class RegistrarPersona extends AppCompatActivity {
                 Toast.makeText(this, "Se debe ingresar un email", Toast.LENGTH_LONG).show();
                 return;
             }
-
+    //si
+            // al registrar el correo y la contraseña tambien registramos los datos de abajo
 
             progressDialog.setMessage("Realizando registro en linea...");
             progressDialog.show();
@@ -99,12 +105,32 @@ public class RegistrarPersona extends AppCompatActivity {
                     //checking if success
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(RegistrarPersona.this, "Se ha registrado el usuario con el email: " + TextEmailPers.getText(), Toast.LENGTH_LONG).show();
-                    } else {
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        // aqui agregaras el codigo de la seccion "Agregar datos de la documentacion de Firebase"
+                        // Crea un nuevo usuario con nombre y apellido
+                        Map<String, Object> usuarios = new HashMap<>();
+                        usuarios.put("nombre", Text_NombrePers.getText());
+                        usuarios.put("apellido", Text_ApellidoPers.getText());
 
+                        // resto de datos a agregar como datos
+
+                        // Agregar un nuevo documento con una ID generada
+                        db.collection("usuarios").document(email).set(usuarios).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                //Iniciar actividad iniciar sesion
+                                // no se guardo
+                                startActivity(new Intent(RegistrarPersona.this, HomePersona.class));
+                            }
+                        }).addOnCanceledListener(new OnCanceledListener() {
+                            @Override
+                            public void onCanceled() {
+                                Toast.makeText(RegistrarPersona.this, "Error el usuario no pudo ser creado", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }else{
                         Toast.makeText(RegistrarPersona.this, "No se pudo registrar el usuario ", Toast.LENGTH_LONG).show();
                         Toast.makeText(RegistrarPersona.this, task.toString(), Toast.LENGTH_SHORT).show();
-
                     }
                     progressDialog.dismiss();
                 }
@@ -114,45 +140,7 @@ public class RegistrarPersona extends AppCompatActivity {
         }
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // aqui agregaras el codigo de la seccion "Agregar datos de la documentacion de Firebase"
-        // Crea un nuevo usuario con nombre y apellido
-        Map<String, Object> usuarios = new HashMap<>();
-        usuarios.put("correo", "Alan@hotmail.com");
-        usuarios.put("contraseña", "paladins");
 
-
-// Agregar un nuevo documento con una ID generada
-        db.collection("usuarios")
-                .add(usuarios)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "Documento agregado con ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error al agregar documento", e);
-                    }
-                });
-
-        db.collection("usuarios")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w(TAG, "Error al obtener documentos.", task.getException());
-                        }
-                    }
-                });
-    }
 
         }
 
