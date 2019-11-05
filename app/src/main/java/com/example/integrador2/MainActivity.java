@@ -94,20 +94,20 @@ public class MainActivity extends AppCompatActivity {
 
         //creating a new user
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        //checking if success
-                        if(task.isSuccessful()){
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                //checking if success
+                if(task.isSuccessful()){
 
-                            Toast.makeText(MainActivity.this,"Se ha registrado el usuario con el email: "+ TextEmail.getText(),Toast.LENGTH_LONG).show();
-                        }else{
+                    Toast.makeText(MainActivity.this,"Se ha registrado el usuario con el email: "+ TextEmail.getText(),Toast.LENGTH_LONG).show();
+                }else{
 
-                            Toast.makeText(MainActivity.this,"No se pudo registrar el usuario ",Toast.LENGTH_LONG).show();
-                            Toast.makeText(MainActivity.this, task.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                        progressDialog.dismiss();
-                    }
-                });
+                    Toast.makeText(MainActivity.this,"No se pudo registrar el usuario ",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, task.toString(), Toast.LENGTH_SHORT).show();
+                }
+                progressDialog.dismiss();
+            }
+        });
 
 
 
