@@ -67,24 +67,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = TextEmail.getText().toString().trim();
-                String password  = TextPassword.getText().toString().trim();
+                String password = TextPassword.getText().toString().trim();
 
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            //ok, tienes un correo y una contraseña, al entrar en esta seccion sabes que el correo y la contraseña son correctos
-                            //task.isSuccessful() significa tarea correcta, es decir si se inicio la sesion existe.
-                            // ahora, la cuenta fue registrada correctamente, significa que esta aqui, como
-                            startActivity(new Intent(MainActivity.this, HomePersona.class));
+                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                //ok, tienes un correo y una contraseña, al entrar en esta seccion sabes que el correo y la contraseña son correctos
+                                //task.isSuccessful() significa tarea correcta, es decir si se inicio la sesion existe.
+                                // ahora, la cuenta fue registrada correctamente, significa que esta aqui, como
+                                startActivity(new Intent(MainActivity.this, HomePersona.class));
+
+                            }
 
                         }
-
-                    }
-                });
-    // correlo
-                //
+                    });
+                    // correlo
+                    //
+                }
             }
         });
     }
