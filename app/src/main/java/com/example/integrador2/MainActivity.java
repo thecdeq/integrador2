@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Debug;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,11 +22,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+   int contador=0;
 
     //defining view objects
     private EditText TextEmail;
@@ -60,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                     //Android maneja contextos, el contexto es el estado actual del usuario, es decir donde esta, el "this" significa la clase o el contexto actual,
                 // mas adelante veras ejemplos donde se usa el contexto
                 startActivity(new Intent(MainActivity.this, RegistrarUsuario.class)); // si, este metodo cambiara a la siguiente ventana al presionar el boton registrar
+
+                Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(1000);
             }
         });
 
@@ -69,16 +84,24 @@ public class MainActivity extends AppCompatActivity {
                 String email = TextEmail.getText().toString().trim();
                 String password = TextPassword.getText().toString().trim();
 
+
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                                db.collection("usuarios").document(TextEmail.getText().toString());
+                                Toast.makeText(MainActivity.this, "db.collection(\"usuarios\").document(TextEmail.getText().toString()); ", Toast.LENGTH_LONG).show();
+
+
+
                                 //ok, tienes un correo y una contraseña, al entrar en esta seccion sabes que el correo y la contraseña son correctos
                                 //task.isSuccessful() significa tarea correcta, es decir si se inicio la sesion existe.
                                 // ahora, la cuenta fue registrada correctamente, significa que esta aqui, como
-                                startActivity(new Intent(MainActivity.this, HomePersona.class));
+
 
                             }
 
@@ -90,6 +113,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+   public void onBackPressed(){
+
+        if (contador==0){
+            Toast.makeText(getApplicationContext(),"Presione de nuevo para salir de la aplicacion", Toast.LENGTH_SHORT).show();
+            contador++;
+        }else{
+            super.onBackPressed();
+        }
+
+        new CountDownTimer(3000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+            contador=0;
+            }
+        }.start();
+   }
 
     private void registrarUsuario(){
 

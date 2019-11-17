@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +32,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegistrarProfesional extends AppCompatActivity {
+    int contador=0;
+
     //defining view objects
     private EditText Text_NombreProfe;
     private EditText Text_ApellidoProfe;
@@ -64,6 +69,11 @@ public class RegistrarProfesional extends AppCompatActivity {
         btnRegistrarProfes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(1000);
+
                 registrarUsuario();
                 //codigo de cloud  Firestore
 
@@ -77,6 +87,30 @@ public class RegistrarProfesional extends AppCompatActivity {
         //Obtenemos el email y la contraseña desde las cajas de texto
         final String email = TextEmailProfe.getText().toString().trim();
         String password = TextPasswordRegProfe.getText().toString().trim();
+        String nombreprofesional = Text_NombreProfe.getText().toString();
+        String apellidoprofesional = Text_ApellidoProfe.getText().toString();
+        String Profesion = TextProfesion.getText().toString();
+
+
+        //verificamos que el campo nombre no este vacio
+        if (nombreprofesional.equals("")){
+            Toast.makeText(this, "Escribir Nombre !!!", Toast.LENGTH_SHORT).show();
+            // Focus en jugar y abrir el Teclado
+            return;
+        }
+        //verificamos que el campo apellido no este vacio
+        if (apellidoprofesional.equals("")){
+            Toast.makeText(this, "Escribir Apellido !!!", Toast.LENGTH_SHORT).show();
+            // Focus en jugar y abrir el Teclado
+            return;
+        }
+        //verificamos que el campo Profesion no este vacio
+        if (Profesion.equals("")){
+            Toast.makeText(this, "Escribir Profesión !!!", Toast.LENGTH_SHORT).show();
+            // Focus en jugar y abrir el Teclado
+            return;
+        }
+
 
         //Verificamos que las cajas de texto no esten vacías
         if (TextUtils.isEmpty(password) | password.length() < 5) {
@@ -136,5 +170,28 @@ public class RegistrarProfesional extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onBackPressed(){
+
+        if (contador==0){
+            Toast.makeText(getApplicationContext(),"Presione de nuevo para salir de la aplicacion", Toast.LENGTH_SHORT).show();
+            contador++;
+        }else{
+            super.onBackPressed();
+        }
+
+        new CountDownTimer(3000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                contador=0;
+            }
+        }.start();
     }
 }

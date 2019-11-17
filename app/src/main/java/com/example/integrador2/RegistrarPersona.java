@@ -3,9 +3,13 @@ package com.example.integrador2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +35,7 @@ import java.util.Map;
 
 
 public class RegistrarPersona extends AppCompatActivity {
+    int contador=0;
 
 
     //defining view objects
@@ -67,6 +72,10 @@ public class RegistrarPersona extends AppCompatActivity {
         btnRegistrarPers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(1000);
+
                 registrarUsuario();
             }
         });
@@ -77,6 +86,24 @@ public class RegistrarPersona extends AppCompatActivity {
         //Obtenemos el email y la contraseña desde las cajas de texto
         final String email = TextEmailPers.getText().toString().trim();
         String password = TextPasswordRegPers.getText().toString().trim();
+        String nombrepersona = Text_NombrePers.getText().toString();
+        String apellidopersona = Text_ApellidoPers.getText().toString();
+
+        //verificamos que el campo nombre no este vacio
+        if (nombrepersona.equals("")){
+            Toast.makeText(this, "Escribir Nombre !!!", Toast.LENGTH_SHORT).show();
+            // Focus en jugar y abrir el Teclado
+            return;
+        }
+
+        //verificamos que el campo apellido no este vacio
+        if (apellidopersona.equals("")){
+            Toast.makeText(this, "Escribir Apellido !!!", Toast.LENGTH_SHORT).show();
+            // Focus en jugar y abrir el Teclado
+            return;
+        }
+
+
 
         //Verificamos que las cajas de texto no esten vacías
         if (TextUtils.isEmpty(password) | password.length() < 5) {
@@ -123,7 +150,7 @@ public class RegistrarPersona extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 progressDialog.dismiss();
-                startActivity(new Intent(RegistrarPersona.this, HomePersona.class));
+                startActivity(new Intent(RegistrarPersona.this, HomePersona.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -131,10 +158,35 @@ public class RegistrarPersona extends AppCompatActivity {
                 progressDialog.dismiss();
                 Toast.makeText(RegistrarPersona.this, "Error los datos del usuario no fueron guardados", Toast.LENGTH_LONG).show();
 
+
             }
         });
 
     }
+    public void onBackPressed(){
+
+        if (contador==0){
+            Toast.makeText(getApplicationContext(),"Presione de nuevo para salir de la aplicacion", Toast.LENGTH_SHORT).show();
+            contador++;
+        }else{
+            super.onBackPressed();
+        }
+
+        new CountDownTimer(3000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                contador=0;
+            }
+        }.start();
+    }
+
+
 }
 
 
