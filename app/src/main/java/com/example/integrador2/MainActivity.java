@@ -97,9 +97,24 @@ public class MainActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 db.collection("usuarios").document(TextEmail.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+
+
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        Toast.makeText(MainActivity.this, documentSnapshot.getData().toString(), Toast.LENGTH_LONG).show();
+                                    String tipo = documentSnapshot.get("tipo").toString();
+                                        if (tipo == "persona") {
+                                            startActivity(new Intent(MainActivity.this, HomePersona.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                        }
+                                        if(tipo == "empresa"){
+                                            startActivity(new Intent(MainActivity.this, HomeEmpresa.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                        }
+                                        if(tipo == "profesional"){
+                                            startActivity(new Intent(MainActivity.this, HomeProfesional.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                        }
+
+                                        Toast.makeText(MainActivity.this, documentSnapshot.getData().get("tipo").toString(), Toast.LENGTH_LONG).show();
+
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
