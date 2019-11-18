@@ -15,9 +15,18 @@ public class HomePersona extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_persona);
 
+    recibirDatosPersona();
+
+    }
+
+    private void recibirDatosPersona(){
+        Bundle extrasP = getIntent().getExtras();
+        String d1 = extrasP.getString("nombre");
 
 
 
+        txtuserPerso = (TextView) findViewById(R.id.textuserPerso);
+        txtuserPerso.setText("BIENVENIDO  "+d1);
 
 
     }

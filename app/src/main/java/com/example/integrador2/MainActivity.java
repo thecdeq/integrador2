@@ -98,18 +98,20 @@ public class MainActivity extends AppCompatActivity {
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 db.collection("usuarios").document(TextEmail.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 
-
-
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     String tipo = documentSnapshot.get("tipo").toString();
-                                        if (tipo == "persona") {
-                                            startActivity(new Intent(MainActivity.this, HomePersona.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                    String nombreP = documentSnapshot.get("nombre").toString();
+                                        if (tipo.equals("persona")) {
+                                            Intent P = new Intent(MainActivity.this, HomePersona.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            P.putExtra("nombre" ,nombreP);
+
+                                            startActivity(P);
                                         }
-                                        if(tipo == "empresa"){
+                                        if(tipo.equals("empresa")){
                                             startActivity(new Intent(MainActivity.this, HomeEmpresa.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                         }
-                                        if(tipo == "profesional"){
+                                        if(tipo.equals("profesional")){
                                             startActivity(new Intent(MainActivity.this, HomeProfesional.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                         }
 

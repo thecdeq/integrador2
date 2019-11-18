@@ -149,8 +149,11 @@ public class RegistrarPersona extends AppCompatActivity {
 
             @Override
             public void onSuccess(Void aVoid) {
+                String nombreRP = Text_NombrePers.getText().toString();
                 progressDialog.dismiss();
-                startActivity(new Intent(RegistrarPersona.this, HomePersona.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                Intent RP = new Intent(RegistrarPersona.this, HomePersona.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                RP.putExtra("nombre", nombreRP);
+                startActivity(RP);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
