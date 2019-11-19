@@ -158,8 +158,11 @@ public class RegistrarProfesional extends AppCompatActivity {
 
             @Override
             public void onSuccess(Void aVoid) {
+                String nombreRPROFE = Text_NombreProfe.getText().toString();
                 progressDialog.dismiss();
-                startActivity(new Intent(RegistrarProfesional.this, HomeProfesional.class));
+                Intent RPROFE = new Intent(RegistrarProfesional.this, HomeProfesional.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                RPROFE.putExtra("nombre", nombreRPROFE);
+                startActivity(RPROFE);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DatosEmpresa"></activity>
+        <activity android:name=".MostrarListaProfesionales"></activity>
+        <activity android:name=".DatosEmpresa" />
         <activity android:name=".HomePersona" />
         <activity android:name=".HomeProfesional" />
         <activity android:name=".HomeEmpresa" />

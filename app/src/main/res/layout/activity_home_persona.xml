@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".HomePersona">
 
+    <EditText
+        android:id="@+id/editConsulta"
+        android:layout_width="339dp"
+        android:layout_height="41dp"
+        android:layout_margin="15dp"
+        android:hint="Coloque una profesión"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="400dp" />
+
     <TextView
         android:id="@+id/textuserPerso"
         android:layout_width="wrap_content"
@@ -17,4 +27,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.241" />
+
+
+    <Button
+        android:id="@+id/btnMostrarDatosProfesional"
+        android:layout_width="323dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        android:background="#532434"
+        android:text="BUSCAR PROFESIONAL"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.703" />
 </androidx.constraintlayout.widget.ConstraintLayout>

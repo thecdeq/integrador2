@@ -102,17 +102,26 @@ public class MainActivity extends AppCompatActivity {
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     String tipo = documentSnapshot.get("tipo").toString();
                                     String nombreP = documentSnapshot.get("nombre").toString();
-                                        if (tipo.equals("persona")) {
+
+
+
+
+
+                                    if (tipo.equals("persona")) {
                                             Intent P = new Intent(MainActivity.this, HomePersona.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             P.putExtra("nombre" ,nombreP);
 
                                             startActivity(P);
                                         }
                                         if(tipo.equals("empresa")){
-                                            startActivity(new Intent(MainActivity.this, HomeEmpresa.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            Intent E = new Intent(MainActivity.this, HomeEmpresa.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            E.putExtra("nombreE", nombreP);
+                                            startActivity(E);
                                         }
                                         if(tipo.equals("profesional")){
-                                            startActivity(new Intent(MainActivity.this, HomeProfesional.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            Intent PROFE = new Intent(MainActivity.this, HomeProfesional.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            PROFE.putExtra("nombrePRO", nombreP);
+                                            startActivity(PROFE);
                                         }
 
                                         Toast.makeText(MainActivity.this, documentSnapshot.getData().get("tipo").toString(), Toast.LENGTH_LONG).show();

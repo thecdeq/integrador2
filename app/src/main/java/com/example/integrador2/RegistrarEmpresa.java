@@ -146,14 +146,17 @@ public class RegistrarEmpresa extends AppCompatActivity {
         usuarios.put("ruc", Text_RUC.getText().toString());
 
 
-
-
         db.collection("usuarios").document(TextEmailEmpre.getText().toString()).set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
 
             @Override
             public void onSuccess(Void aVoid) {
+                String nombreRE = Text_NombreEmpr.getText().toString();
                 progressDialog.dismiss();
-                startActivity(new Intent(RegistrarEmpresa.this, HomeEmpresa.class));
+
+
+                Intent RE = new Intent(RegistrarEmpresa.this, HomeEmpresa.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                RE.putExtra("nombreE", nombreRE);
+                startActivity(RE);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
